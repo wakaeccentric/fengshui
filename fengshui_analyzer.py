@@ -7,6 +7,15 @@ import google.generativeai as genai
 from datetime import datetime
 from PIL import Image
 import io
+"""
+風水相性分析モジュール
+Feng Shui compatibility analyzer using Google Gemini API
+"""
+
+import google.generativeai as genai
+from datetime import datetime
+from PIL import Image
+import io
 import base64
 import logging
 import traceback
@@ -137,7 +146,7 @@ async def analyze_face_fengshui(
 特に**金運（財運）**に関する分析を重点的にお願いします。
 
 分析結果は以下のJSON形式で返してください：
-{{
+{
   "face_shape": "顔の形（例：丸顔）",
   "face_shape_meaning": "顔の形の風水的意味",
   "eyes_analysis": "目の分析結果",
@@ -151,7 +160,7 @@ async def analyze_face_fengshui(
   "overall_impression": "全体的な印象と総合評価",
   "strengths": ["強み1", "強み2", "強み3"],
   "wealth_potential": "金運のポテンシャルについての詳細な説明"
-}}
+}
 
 必ずJSON形式で返答してください。
 """
