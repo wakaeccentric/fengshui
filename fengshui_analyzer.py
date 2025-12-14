@@ -11,14 +11,28 @@ import base64
 import logging
 import traceback
 import hashlib
+import os
+import tempfile
 
-# ロギング設定
-logging.basicConfig(
-    filename="c:/opt/data/ai/fengshui/error.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    encoding="utf-8",
-)
+# ロギング設定（クロスプラットフォーム）
+try:
+    # 優先順: 環境変数 -> ワークスペース内の logs ディレクトリ -> OS の一時ディレクトリ
+    log_dir = os.environ.get("FENGSHUI_LOG_DIR") or os.path.join(os.getcwd(), "logs")
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, "error.log")
+
+    logging.basicConfig(
+        filename=log_path,
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        encoding="utf-8",
+    )
+except Exception:
+    # ファイル出力ができない環境では標準エラーへフォールバック
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+    )
 
 # 十二支の計算
 ZODIAC_ANIMALS = [
