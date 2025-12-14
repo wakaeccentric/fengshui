@@ -1,19 +1,93 @@
-# 💬 Chatbot template
+# 風水相性診断アプリ 🔮
 
-A simple Streamlit app that shows how to build a chatbot using OpenAI's GPT-3.5.
+顔相と五行思想に基づいて、2名の女性との相性を比較分析するStreamlitアプリケーションです。
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://chatbot-template.streamlit.app/)
+## 機能
 
-### How to run it on your own machine
+- 📸 2名の女性の顔写真をアップロード
+- 👤 男性の年齢と生年月日を入力
+- 🤖 Google Gemini AIによる顔相分析
+- 🌟 五行（木火土金水）による相性診断
+- 💰 金運を重視した総合評価
+- 📊 詳細な比較レポート
 
-1. Install the requirements
+## セットアップ
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+### 1. 依存関係のインストール
 
-2. Run the app
+```bash
+pip install -r requirements.txt
+```
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+### 2. Google Gemini APIキーの取得
+
+1. [Google AI Studio](https://makersuite.google.com/app/apikey) にアクセス
+2. 無料のAPIキーを作成（月間60リクエストまで無料）
+3. APIキーをコピー
+
+### 3. アプリケーションの起動
+
+```bash
+streamlit run app.py
+```
+
+ブラウザが自動的に開き、アプリケーションが表示されます。
+
+## 使い方
+
+1. **サイドバー**で以下を入力：
+   - あなたの年齢
+   - 生年月日（干支と五行の計算に使用）
+   - Gemini APIキー
+
+2. **メイン画面**で：
+   - 女性Aの顔写真をアップロード
+   - 女性Bの顔写真をアップロード
+
+3. **「🔮 風水診断を開始」**ボタンをクリック
+
+4. 結果を確認：
+   - 総合スコア比較
+   - 詳細な顔相分析
+   - 金運ポテンシャル
+   - 五行相性
+   - おすすめの判定
+
+## 技術スタック
+
+- **Streamlit**: Webアプリケーションフレームワーク
+- **Google Gemini API**: AI画像分析
+- **PIL (Pillow)**: 画像処理
+- **Python-dateutil**: 日付計算
+
+## 風水・五行について
+
+このアプリは以下の伝統的な中国の思想に基づいています：
+
+- **顔相学**: 顔の特徴から運勢を読み取る
+- **五行思想**: 木・火・土・金・水の5つの要素の相互作用
+- **干支**: 12の動物による年の分類
+- **相生・相克**: 五行の相性関係
+
+## 注意事項
+
+⚠️ このアプリケーションは娯楽・参考目的です。実際の人間関係の判断は、多くの要素を考慮して慎重に行ってください。
+
+## ライセンス
+
+このプロジェクトは個人利用・学習目的で作成されています。
+
+## トラブルシューティング
+
+### APIエラーが発生する場合
+- APIキーが正しいか確認してください
+- 月間の無料枠（60リクエスト）を超えていないか確認してください
+- インターネット接続を確認してください
+
+### 画像がアップロードできない場合
+- 画像形式がJPG、JPEG、PNGであることを確認してください
+- 画像サイズが大きすぎないか確認してください（推奨: 5MB以下）
+
+### 分析結果が表示されない場合
+- 顔がはっきり写っている画像を使用してください
+- 画像が明るく、顔全体が写っているか確認してください
