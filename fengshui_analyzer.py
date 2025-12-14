@@ -151,21 +151,21 @@ async def analyze_face_fengshui(
 特に**金運（財運）**に関する分析を重点的にお願いします。
 
 分析結果は以下のJSON形式で返してください：
-{
-  "face_shape": "顔の形（例：丸顔）",
-  "face_shape_meaning": "顔の形の風水的意味",
-  "eyes_analysis": "目の分析結果",
-  "nose_analysis": "鼻の分析結果（財運との関連を含む）",
-  "mouth_analysis": "口の分析結果",
-  "forehead_analysis": "額の分析結果",
-  "ears_analysis": "耳の分析結果",
-  "complexion_analysis": "顔色・肌の分析結果",
-  "fortune_score": 85,
-  "wealth_fortune_score": 80,
-  "overall_impression": "全体的な印象と総合評価",
-  "strengths": ["強み1", "強み2", "強み3"],
-  "wealth_potential": "金運のポテンシャルについての詳細な説明"
-}
+{{
+    "face_shape": "顔の形（例：丸顔）",
+    "face_shape_meaning": "顔の形の風水的意味",
+    "eyes_analysis": "目の分析結果",
+    "nose_analysis": "鼻の分析結果（財運との関連を含む）",
+    "mouth_analysis": "口の分析結果",
+    "forehead_analysis": "額の分析結果",
+    "ears_analysis": "耳の分析結果",
+    "complexion_analysis": "顔色・肌の分析結果",
+    "fortune_score": 85,
+    "wealth_fortune_score": 80,
+    "overall_impression": "全体的な印象と総合評価",
+    "strengths": ["強み1", "強み2", "強み3"],
+    "wealth_potential": "金運のポテンシャルについての詳細な説明"
+}}
 
 必ずJSON形式で返答してください。
 """
