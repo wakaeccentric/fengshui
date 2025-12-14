@@ -7,15 +7,6 @@ import google.generativeai as genai
 from datetime import datetime
 from PIL import Image
 import io
-"""
-風水相性分析モジュール
-Feng Shui compatibility analyzer using Google Gemini API
-"""
-
-import google.generativeai as genai
-from datetime import datetime
-from PIL import Image
-import io
 import base64
 import logging
 import traceback
