@@ -1,5 +1,7 @@
+import time
 import streamlit as st
 from openai import OpenAI
+from openai.error import RateLimitError, OpenAIError
 
 # Show title and description.
 st.title("💬 Chatbot")
@@ -39,18 +41,48 @@ else:
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        # Generate a response using the OpenAI API.
-        stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
-        )
+        # Generate a response using the OpenAI API with retry on rate limits.
+        response = None
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": m["role"], "content": m["content"]}
+                        for m in st.session_state.messages
+                    ],
+                    stream=False,
+                )
+                break
+            except RateLimitError:
+                if attempt < max_retries - 1:
+                    wait = 2 ** attempt
+                    time.sleep(wait)
+                    continue
+                else:
+                    st.error("API のレート制限に達しました。しばらくしてから再試行してください。")
+            except OpenAIError as e:
+                st.error(f"API エラー: {e}")
+                break
+            except Exception as e:
+                st.error(f"予期しないエラー: {e}")
+                break
 
-        # Stream the response to the chat using `st.write_stream`, then store it in 
-        # session state.
-        with st.chat_message("assistant"):
-            response = st.write_stream(stream)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        # Parse and display the response (robust to different response shapes).
+        if response:
+            content = ""
+            try:
+                # common shape: response.choices[0].message["content"]
+                content = response.choices[0].message["content"]
+            except Exception:
+                try:
+                    # fallback to dict-like access
+                    content = response["choices"][0]["message"]["content"]
+                except Exception:
+                    # last resort: stringify response
+                    content = str(response)
+
+            with st.chat_message("assistant"):
+                st.markdown(content)
+            st.session_state.messages.append({"role": "assistant", "content": content})
