@@ -205,7 +205,7 @@ with st.sidebar:
 
 
     # .envファイルからAPIキーを読み込む
-    api_key =''
+    api_key =st.secrets["google"]["api_key"]
 
     # 干支表示
     if man_birthdate:
