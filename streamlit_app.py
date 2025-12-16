@@ -205,7 +205,7 @@ with st.sidebar:
 
 
     # .envファイルからAPIキーを読み込む
-    api_key ='AIzaSyCfogtuhr6fzawaESQpIbLuHjAVkSLpcxU'
+    api_key =''
 
     # 干支表示
     if man_birthdate:
