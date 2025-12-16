@@ -202,26 +202,13 @@ with st.sidebar:
         help="生年月日から干支と五行を計算します",
     )
 
-    # APIキー入力
-    st.markdown("### 🔑 API設定")
+
 
     # .envファイルからAPIキーを読み込む
-    default_api_key = ""
-    try:
-        with open("c:/opt/data/ai/fengshui/.env", "r") as f:
-            for line in f:
-                if line.startswith("GEMINI_API_KEY="):
-                    default_api_key = line.split("=", 1)[1].strip()
-                    break
-    except FileNotFoundError:
-        pass
+    api_key ='AIzaSyCfogtuhr6fzawaESQpIbLuHjAVkSLpcxU'
 
-    api_key = st.text_input(
-        "Gemini APIキー",
-        value=default_api_key,
-        type="password",
-        help="Google AI StudioからAPIキーを取得してください。.envファイルに保存すると自動入力されます",
-    )
+
+
 
     if api_key:
         st.success("✅ APIキー設定済み")
