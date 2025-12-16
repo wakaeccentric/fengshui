@@ -207,40 +207,6 @@ with st.sidebar:
     # .envファイルからAPIキーを読み込む
     api_key ='AIzaSyCfogtuhr6fzawaESQpIbLuHjAVkSLpcxU'
 
-
-
-
-    if api_key:
-        st.success("✅ APIキー設定済み")
-
-        # モデル確認ボタン
-        if st.button("利用可能なモデルを確認"):
-            try:
-                import google.generativeai as genai
-
-                genai.configure(api_key=api_key)
-                models = list(genai.list_models())
-                vision_models = []
-
-                for m in models:
-                    try:
-                        if "generateContent" in m.supported_generation_methods:
-                            vision_models.append(m.name)
-                    except Exception:
-                        # 一部のモデルは初期化エラーが出る可能性があるのでスキップ
-                        continue
-
-                st.info(f"利用可能なモデル数: {len(vision_models)}")
-                if vision_models:
-                    st.code("\n".join(vision_models))
-                else:
-                    st.warning("画像分析可能なモデルが見つかりませんでした")
-            except Exception as e:
-                st.error(f"モデル取得エラー: {str(e)}")
-    else:
-        st.warning("⚠️ APIキーが必要です")
-        st.markdown("[APIキーを取得](https://makersuite.google.com/app/apikey)")
-
     # 干支表示
     if man_birthdate:
         zodiac = calculate_zodiac(man_birthdate.year)
